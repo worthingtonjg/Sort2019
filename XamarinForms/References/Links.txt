@@ -1,0 +1,44 @@
+History of Xamarin
+https://en.wikipedia.org/wiki/Xamarin
+
+Xamarin Forms Release Notes
+https://docs.microsoft.com/en-us/xamarin/xamarin-forms/release-notes/
+
+
+Pros and Cons of Xamarin Forms
+https://www.altexsoft.com/blog/mobile/pros-and-cons-of-xamarin-vs-native/
+http://discoverbigfish.com/blog/pros-cons-xamarin-app-development.html
+
+Why Xamarin
+https://dzone.com/articles/why-use-xamarin-for-mobile-app-development
+
+Xamarin Forms 4.0 
+https://devblogs.microsoft.com/xamarin/xamarin-forms-4-0-preview/
+
+Learn 
+https://docs.microsoft.com/en-us/xamarin/get-started/quickstarts/
+https://dotnet.microsoft.com/learn/xamarin
+https://channel9.msdn.com/Search?term=xamarin&lang-en=true
+https://dotnet.microsoft.com/apps/xamarin/xamarin-forms
+
+Github
+https://github.com/xamarin/Xamarin.Forms
+https://github.com/xamarin
+
+Getting Started
+https://docs.microsoft.com/en-us/xamarin/#pivot=get-started
+https://docs.microsoft.com/en-us/xamarin/#pivot=xamarin-forms
+
+Xamarin Forms Documentation
+https://docs.microsoft.com/en-us/xamarin/#pivot=get-started
+
+Good Looking Xamarin Apps
+https://github.com/jsuarezruiz/xamarin-forms-goodlooking-UI
+
+Sync Fusion UI
+https://github.com/syncfusion/essential-ui-kit-for-xamarin.forms
+Creating a weather app:
+https://www.youtube.com/watch?v=0jCVQ7JaNws
+
+Other links:
+https://github.com/jsuarezruiz/awesome-xamarin-forms

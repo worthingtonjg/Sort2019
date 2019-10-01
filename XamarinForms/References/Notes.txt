@@ -1,0 +1,143 @@
+https://github.com/xamarin
+
+https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/controls/index
+
+
+App Class
+App Lifecycle
+MessagingCenter
+
+Pages: https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/controls/pages
+	iOS = ViewController
+	Android = Activity
+	
+	ContentPage
+	MasterDetailPage
+	NavigationPage
+	TabbedPage
+	CarouselPage
+	TemplatedPage
+	
+Layouts: https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/controls/layouts
+
+ContentPresenter
+ContentView
+ScrollView
+Frame
+TemplatedView
+StackLayout
+AbsoluteLayout
+RelativeLayout
+Grid
+FlexLayout
+
+Views: https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/controls/views
+
+Label
+Image
+BoxView
+WebView
+OpenGLView
+Map
+Button
+ImageButton
+SearchBar
+CheckBox
+Slider 
+Stepper
+Switch
+DatePicker
+TimePicker
+Entry
+Editor
+ActivityIndicator
+ProgressBar
+CollectionView
+ListView
+Picker
+TableView
+
+Cells: https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/controls/cells
+
+Children of ListView and TableViews
+
+TextCell
+ImageCell
+SwitchCell
+EntryCell
+
+DependencyService
+Xamarin Essentials
+
+Effects
+https://docs.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/effects/introduction
+
+
+Xamarin.Forms Pages, Layouts and Controls presents a common API to describe cross-platform mobile user interfaces. 
+Each page, layout, and control is rendered differently on each platform using a Renderer class that in turn creates a 
+native control (corresponding to the Xamarin.Forms representation), arranges it on the screen, and adds the behavior 
+specified in the shared code.
+
+Developers can implement their own custom Renderer classes to customize the appearance and/or behavior of a control. 
+
+However, implementing a custom renderer class to perform a simple control customization is often a heavy-weight response. Effects simplify 
+this process, allowing the native controls on each platform to be more easily customized.  Effects are created in platform-specific projects 
+by subclassing the PlatformEffect control, and then the effects are consumed by attaching them to an appropriate control in a Xamarin.Forms .NET 
+Standard library or Shared Library project.
+
+Why would you use Effects?
+
+Most people use effects to simply change properties of a native control that aren’t yet made available through the existing Xamarin Forms controls. 
+
+Contrary to a custom renderer that always targets controls of a specific type an effect can be re-used throughout your app. Another advantage is that you can parameterize your effects with additional data. Most people use effects to simply change properties of a native control that aren’t yet made available through the existing Xamarin Forms controls. Effects work by attaching/detaching them to/from a Xamarin Forms control.
+
+You can add multiple effects to a control. As you might have noticed this gives you a lot of freedom because unlike a custom renderer you specifically decide which control gets the effect without any need to subclass it. When creating an effect it is not mandatory to implement it in each platform. You can create an effect and choose to only implement it in iOS. It’s completely optional.
+
+https://github.com/xamarin/XamarinCommunityToolkit/tree/master/Toolkit
+
+Custom Renderers
+https://docs.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/custom-renderer/introduction
+
+Changing the background color of the control on each platform has been accomplished purely through subclassing the control. However, this technique is limited in what it can achieve as it is not possible to take advantage of platform-specific enhancements and customizations. When they are required, custom renderers must be implemented.
+
+https://docs.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/custom-renderer/renderers
+
+Creating a Custom Renderer Class
+The process for creating a custom renderer class is as follows:
+
+Create a subclass of the renderer class that renders the native control.
+Override the method that renders the native control and write logic to customize the control. Often, the OnElementChanged method is used to render the native control, which is called when the corresponding Xamarin.Forms control is created.
+Add an ExportRenderer attribute to the custom renderer class to specify that it will be used to render the Xamarin.Forms control. This attribute is used to register the custom renderer with Xamarin.Forms.
+
+https://docs.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/custom-renderer/entry
+
+See 1st images
+
+
+Native Libraries
+https://github.com/xamarin/XamarinComponents
+
+Icons
+https://stackoverflow.com/questions/44461120/xamarin-forms-icons
+https://github.com/jsmarcus/Xamarin.Plugins/tree/master/Iconize
+https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/visual/
+https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/visual/material-visual
+https://doumer.me/icons-with-font-awesome-5-xamarin-forms/
+https://www.thewissen.io/xamarin-forms-ui-spotify/
+https://www.thewissen.io/xamarin-forms-ui-spotify/
+https://www.thewissen.io/xamarin-forms-ui-runkeeper/
+https://www.thewissen.io/xamarin-forms-ui-twitter/
+https://xamarinhelp.com/creating-instagram-ui-xamarin-forms/
+https://ui8.net/
+https://doumer.me/using-bootstrap-and-material-font-icons-in-xamarin-forms/
+https://www.c-sharpcorner.com/article/add-images-icons-and-splash-screen-in-xamarin-forms/
+https://stackoverflow.com/questions/36882577/best-way-to-add-android-standard-icons-in-xamarin
+https://montemagno.com/using-font-icons-in-xamarin-forms-goodbye-images-hello-fonts/
+
+http://www.johankarlsson.net/2015/08/using-ios-standard-icons-in-xamarin.html
+
+Xam.Plugins.Media
+https://xamarinhelp.com/use-camera-take-photo-xamarin-forms/
+
+Splash Screen
+https://xamarinhelp.com/creating-splash-screen-xamarin-forms/
