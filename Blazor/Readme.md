@@ -3,25 +3,26 @@
 
 This presentation is based on the following workshop created by the dot net foundation, the instructions below walk through the files found at the link below.  
 
-**Workshop Link:** 
+### Workshop Link
 https://github.com/dotnet-presentations/blazor-workshop
 
 I have created a modified starting point to simplify some of the steps so that the presentation would go smoother and be compressed to an hour and a half.  If you are trying to follow my version of this walk-through you may want to use my starting point, otherwise use theirs.
 
-**My Starting Point:**
+### My Starting Point
 https://github.com/worthingtonjg/Sort2019/blob/master/Blazor/00-Starting-point.zip
 
 The powerpoint for my presentation is: 
 
-**Powerpoint:**
+### Powerpoint
 https://github.com/worthingtonjg/Sort2019/blob/master/Blazor/Final%20-%20Blazor%20-%20Sort%202019%20-%20Jon%20Worthington.pptx
 
 ---
 Start by walking through starting point code:
-- Show Shared
-- Show Server
-- Client => Blazor => All this code is on the client side
-	- Should look familiar, very similar to razor
+- Show Shared Project
+- Show Server Project
+- Show Client Project
+
+**Cient Project => Blazor => All this code is on the client side!!!! Should look familiar, very similar to razor **
 
 Bootstrap process 
 
@@ -101,7 +102,7 @@ Open MainLayout.razor and discuss
 </div>
 ```
 
-Build and run
+**Build and run**
 
 Talk about Navlink
 
@@ -135,11 +136,11 @@ Create *ConfigurePizzaDialog.razor* in *Shared *=> This will be our first reusea
 }
 ```
 
-Discuss Parameters
-Show Pizza class
-Discuss Binding
+- Discuss Parameters
+- Show Pizza class
+- Discuss Binding
 
------------------------- Index.Razor --------------------------------
+**------------------------ Index.Razor --------------------------------**
 
 Replace <li ... with 
 ```
@@ -175,14 +176,14 @@ At bottom of HTML add ...
 }
 ```
 
-Build and Run to test dialog
+**Build and Run to test dialog**
 
-*******************************************************************
-Now we will talk about two way Data Binding
-Let's let the user choose the size of their pizza
-Replace empty <form> with ...
+---
+- Now we will talk about two way Data Binding
+- Let's let the user choose the size of their pizza
+- Replace empty <form> with ...
 
------------------  ConfigurePizzaDialog.razor -----------------------
+**-----------------  ConfigurePizzaDialog.razor -----------------------**
 ```
 <form class="dialog-body">
     <div>
@@ -195,16 +196,15 @@ Replace empty <form> with ...
 </form>
 ```
 
-So far we have been using just one way data binding
-@bind / @bind-value
+- So far we have been using just one way data binding
+- @bind / @bind-value
+- **Build and run**
+- The user should also be able to select additional toppings on ConfigurePizzaDialog.
 
-Build and run
-The user should also be able to select additional toppings on ConfigurePizzaDialog.
+---
+# Now lets give the user the ability to add toppings
 
-*******************************************************************
-Now lets give the user the ability to add toppings
-
------------------  ConfigurePizzaDialog.razor -----------------------
+**-----------------  ConfigurePizzaDialog.razor -----------------------**
 
 At top of page
 
@@ -223,7 +223,7 @@ in @code
     }
 ```
 
-Put this inside the <form class="dialog-body">, below the existing <div>."
+Put this inside the <form class="dialog-body">, below the existing DIV block
 
 ```
 <div>
@@ -287,21 +287,21 @@ Also add the following event handlers for topping selection and removal:
 	}
 ```
 
-Walk through code
-**Build and run**
+- Walk through code
+- **Build and run**
 
-*******************************************************************
-#Component Events
+---
+# Component Events
 
 Lets wire up the Cancel and Order buttons
 
------------------  ConfigurePizzaDialog.razor -----------------------
+**-----------------  ConfigurePizzaDialog.razor -----------------------**
 ```
 [Parameter] public EventCallback OnCancel { get; set; }
 [Parameter] public EventCallback OnConfirm { get; set; }
 ```
 
-Replace <div class="dialog-buttons"> with ...
+Replace `<div class="dialog-buttons">` with ...
 
 ```
 <div class="dialog-buttons">
