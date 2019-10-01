@@ -1247,7 +1247,7 @@ Now create a new LoginDisplay component in Shared
     </AuthorizeView>
 </div>
 ```
-<AuthorizeView> is a built-in component that displays different content depending on whether the user meets specified authorization conditions. 
+`<AuthorizeView>` is a built-in component that displays different content depending on whether the user meets specified authorization conditions. 
 
 Now lets add the LoginDisplay component to the MainLayout
 
@@ -1360,7 +1360,9 @@ also need to modify the UI as follow (then explain) ...
 **Build and run**
 
 We've just introduced a pretty serious defect into the application. 
+
 Login redirect loses OrderState
+
 Fix it with session Storage
 
 Show sessionStorage.js
@@ -1434,22 +1436,25 @@ Don't close app yet - do next step
 
 **************************************************************
 Signout and show MyOrders - just says loading...
+
 This is because we are not authorized
-You can place an [Authorize] attribute on a routable @page component. 
+
+You can place an `[Authorize]` attribute on a routable @page component. 
+
 This is useful if you want to control the reachability of an entire page based on authorization conditions.
 
------------------ MyOrders.razor -----------------------
+**----------------- MyOrders.razor -----------------------**
 ```
 @attribute [Authorize]
 ```
------------------ MyOrders.razor -----------------------
 
-Build and run
+**Build and run**
+
 Go to My Orders and show Not Authorized
 
 We can do better than that ...
 
------------------ App.razor -----------------------
+**----------------- App.razor -----------------------**
 ```
 <CascadingAuthenticationState>
     <Router AppAssembly="typeof(Program).Assembly">
@@ -1471,15 +1476,16 @@ We can do better than that ...
 ```
 
 **Build and Run**
+
 Now if you're logged out and try to go to My orders, you'll get a much nicer outcome
 
 While signed out ... navigate to: /myorders/1
 
------------------ OrderDetails.razor -----------------------
+**----------------- OrderDetails.razor -----------------------**
 ```
 @attribute [Authorize]
 ```
------------------ OrderDetails.razor -----------------------
+
 
 **Build and Run**
 
@@ -1495,19 +1501,19 @@ OrdersController => order.UserId = GetUserId()
 
 Now each order will be stamped with the ID of the user who owns it.
 
-***********************************************************************
-#More on Javascript Interop
+---
+# More on Javascript Interop
 
 Users of the pizza store can now track the status of their orders in real time. In this session we'll use JavaScript interop to add a 
 real-time map to the order status page that answers the age old question, "Where's my pizza?!?".
 
 In this situation we already have a map built using javascript, and just want to use it in our blazor application
 
-- show javascript: deliveryMap.js
+show javascript: deliveryMap.js
 
 Add new component to shared:  Map.razor
 
------------------ Map.razor -----------------------
+**----------------- Map.razor -----------------------**
 ```
 @using Microsoft.JSInterop
 @inject IJSRuntime JSRuntime
@@ -1532,17 +1538,18 @@ Add new component to shared:  Map.razor
 
 Explain code
 
-Add the Map component to the OrderDetails page by adding the following just below the track-order-details div:
+Add the Map component to the *OrderDetails* page by adding the following just below the `track-order-details` div:
 
------------------ OrderDetails.razor -----------------------
+** ----------------- OrderDetails.razor -----------------------
 ```
 <div class="track-order-map">
     <Map Zoom="13" Markers="orderWithStatus.MapMarkers" />
 </div>
 ```
------------------ OrderDetails.razor -----------------------
 
-Notes:
+
+# Notes to Self:
+- Close by mentioning these links and going back to powerpoint
 - https://github.com/dotnet-presentations/blazor-workshop
 - https://docs.microsoft.com/en-us/aspnet/core/blazor/?view=aspnetcore-3.0
 - Shortcut Reminder: Shift+F2
