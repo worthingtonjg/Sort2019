@@ -1,30 +1,35 @@
 
 # Introduction
 
-This presentation is based on the following workshop created by the dot net foundation, the instructions below walk through the files found at the link below.  
+This was a presentation I gave that the SORT 2019 conference.  It introduced the group to Web Assembly and Blazor.
 
 ### Workshop Link
+
+This presentation is based on the following workshop created by the dot net foundation, the instructions below walk through the files found at the link below.  
+
 https://github.com/dotnet-presentations/blazor-workshop
+
+### My Starting Point
 
 I have created a modified starting point to simplify some of the steps so that the presentation would go smoother and be compressed to an hour and a half.  If you are trying to follow my version of this walk-through you may want to use my starting point, otherwise use theirs.
 
-### My Starting Point
 https://github.com/worthingtonjg/Sort2019/blob/master/Blazor/00-Starting-point.zip
+
+### Powerpoint
 
 The powerpoint for my presentation is: 
 
-### Powerpoint
 https://github.com/worthingtonjg/Sort2019/blob/master/Blazor/Final%20-%20Blazor%20-%20Sort%202019%20-%20Jon%20Worthington.pptx
 
 ---
+# Start Demo
+
 Start by walking through starting point code:
 - Show Shared Project
 - Show Server Project
-- Show Client Project
+- Show Client Project - Point out that this is where the Blazor code lives => All this code is on the client side!!!! Should look familiar, very similar to razor
 
-**Cient Project => Blazor => All this code is on the client side!!!! Should look familiar, very similar to razor **
-
-Bootstrap process 
+Explain Bootstrap process (at least as best as I understand it) ...
 
 ```
 	index.html 
@@ -39,6 +44,8 @@ Bootstrap process
 ```
 
 ---
+# Our First Blazor Page
+
 Open Index.Razor
 - Talk about Razor Component
 - Pages => Routing => @page
@@ -78,7 +85,7 @@ Now we will add some css to make our page look nice
 ```
 **Build and run**
 
---
+---
 # Now lets add navigation
 
 Open MainLayout.razor and discuss
@@ -102,15 +109,14 @@ Open MainLayout.razor and discuss
 </div>
 ```
 
-**Build and run**
-
-Talk about Navlink
+- **Build and run**
+- Talk about Navlink
 
 ---
 # Now we want to customize our pizza
 Lets create a pizza customization dialog => Our first Blazor Component
 
-Create *ConfigurePizzaDialog.razor* in *Shared *=> This will be our first reuseable blazor component
+Create *ConfigurePizzaDialog.razor* in *Shared* => This will be our first reuseable blazor component
 
 **-----------------  ConfigurePizzaDialog.razor -----------------------**
 ```
