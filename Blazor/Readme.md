@@ -1,16 +1,32 @@
-This presentation is based on the following workshop created by the dot net foundation, the instructions below walk through the files found at the link below.  I have created a modified starting point to simplify some of the steps so that the presentation would go smoother and be compressed to an hour and a half.
+#Introduction
 
-Workshop Link: https://github.com/dotnet-presentations/blazor-workshop
+This presentation is based on the following workshop created by the dot net foundation, the instructions below walk through the files found at the link below.  
 
-*******************************************************************
-Introduce code
-- Shared
-- Server
+Workshop Link: 
+https://github.com/dotnet-presentations/blazor-workshop
+
+I have created a modified starting point to simplify some of the steps so that the presentation would go smoother and be compressed to an hour and a half.  If you are trying to follow my version of this walk-through you may want to use my starting point, otherwise use theirs.
+
+My Starting Point: 
+https://github.com/worthingtonjg/Sort2019/blob/master/Blazor/00-Starting-point.zip
+
+The powerpoint for my presentation is: 
+
+Powerpoint: 
+https://github.com/worthingtonjg/Sort2019/blob/master/Blazor/Final%20-%20Blazor%20-%20Sort%202019%20-%20Jon%20Worthington.pptx
+
+---
+Start by walking through starting point code:
+- Show Shared
+- Show Server
 - Client => Blazor => All this code is on the client side
 	- Should look familiar, very similar to razor
-	- Bootstrap process 
-	
-> index.html => (blazor.webassembly.js) => mono.wasm => <app> => Your DLL => App.Razor => Program.cs => Startup.cs => MainLayout.razor => Index.Razor
+
+Bootstrap process 
+
+```
+	index.html => (blazor.webassembly.js) => mono.wasm => <app> => Your DLL => App.Razor => Program.cs => Startup.cs => MainLayout.razor => Index.Razor
+```
 
 *******************************************************************
 Open Index.Razor
