@@ -1,18 +1,19 @@
-#Introduction
+
+# Introduction
 
 This presentation is based on the following workshop created by the dot net foundation, the instructions below walk through the files found at the link below.  
 
-Workshop Link: 
+**Workshop Link:** 
 https://github.com/dotnet-presentations/blazor-workshop
 
 I have created a modified starting point to simplify some of the steps so that the presentation would go smoother and be compressed to an hour and a half.  If you are trying to follow my version of this walk-through you may want to use my starting point, otherwise use theirs.
 
-My Starting Point: 
+**My Starting Point:**
 https://github.com/worthingtonjg/Sort2019/blob/master/Blazor/00-Starting-point.zip
 
 The powerpoint for my presentation is: 
 
-Powerpoint: 
+**Powerpoint:**
 https://github.com/worthingtonjg/Sort2019/blob/master/Blazor/Final%20-%20Blazor%20-%20Sort%202019%20-%20Jon%20Worthington.pptx
 
 ---
@@ -25,10 +26,18 @@ Start by walking through starting point code:
 Bootstrap process 
 
 ```
-	index.html => (blazor.webassembly.js) => mono.wasm => <app> => Your DLL => App.Razor => Program.cs => Startup.cs => MainLayout.razor => Index.Razor
+	index.html 
+	=> (blazor.webassembly.js) and mono.wasm 
+	=> <app> 
+	=> Your DLL 
+	=> App.Razor 
+	=> Program.cs 
+	=> Startup.cs 
+	=> MainLayout.razor 
+	=> Index.Razor
 ```
 
-*******************************************************************
+---
 Open Index.Razor
 - Talk about Razor Component
 - Pages => Routing => @page
@@ -43,10 +52,10 @@ Open Index.Razor
 	- Show DLL's loading (mono, etc)
 	- Show json
 
-*******************************************************************
+---
 Now we will add some css to make our page look nice
 
------------------ Index.razor -----------------------
+**----------------- Index.razor -----------------------**
 ```
 <div class="main">
     <ul class="pizza-cards">
@@ -68,12 +77,12 @@ Now we will add some css to make our page look nice
 ```
 **Build and run**
 
-*******************************************************************
-Now lets add navigation
+--
+# Now lets add navigation
 
 Open MainLayout.razor and discuss
 
------------------  MainLayout.razor -----------------------
+**-----------------  MainLayout.razor -----------------------**
 
 ```
 @inherits LayoutComponentBase
@@ -96,13 +105,13 @@ Build and run
 
 Talk about Navlink
 
-*******************************************************************
-Now we want to customize our pizza
+---
+# Now we want to customize our pizza
 Lets create a pizza customization dialog => Our first Blazor Component
 
 Create *ConfigurePizzaDialog.razor* in *Shared *=> This will be our first reuseable blazor component
 
------------------  ConfigurePizzaDialog.razor -----------------------
+**-----------------  ConfigurePizzaDialog.razor -----------------------**
 ```
 <div class="dialog-container">
     <div class="dialog">
