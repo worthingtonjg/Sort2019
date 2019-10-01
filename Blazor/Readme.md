@@ -1,34 +1,37 @@
-> Show Url
-https://github.com/dotnet-presentations/blazor-workshop
+This presentation is based on the following workshop created by the dot net foundation, the instructions below walk through the files found at the link below.  I have created a modified starting point to simplify some of the steps so that the presentation would go smoother and be compressed to an hour and a half.
+
+Workshop Link: https://github.com/dotnet-presentations/blazor-workshop
 
 *******************************************************************
-
-> Introduce code
-> 	Shared
-> 	Server
->	Client => Blazor => All this code is on the client side
-	> Should look familiar, very similar to razor
-	> Bootstrap process => index.html => (blazor.webassembly.js) => mono.wasm => <app> => Your DLL => App.Razor => Program.cs => Startup.cs => MainLayout.razor => Index.Razor
-
-> Open Index.Razor
-	> Talk about Razor Component
-	> Pages => Routing => @page
-	> Inject => Dependency Injection
-	> @ Razor
-	> @ One-way binding
-	> Blazor Lifecycle Methods
-	> Show specials controller
-
-> Build and run starting app
-> F12 
-	> Show DLL's loading (mono, etc)
-	> json
+Introduce code
+- Shared
+- Server
+- Client => Blazor => All this code is on the client side
+	- Should look familiar, very similar to razor
+	- Bootstrap process 
+	
+> index.html => (blazor.webassembly.js) => mono.wasm => <app> => Your DLL => App.Razor => Program.cs => Startup.cs => MainLayout.razor => Index.Razor
 
 *******************************************************************
-> Now we will add some css to make our page look nice
+Open Index.Razor
+- Talk about Razor Component
+- Pages => Routing => @page
+- Inject => Dependency Injection
+- @ Razor
+- @ One-way binding
+- Blazor Lifecycle Methods
+- Show specials controller
+
+**Build and run starting app**
+- F12 
+	- Show DLL's loading (mono, etc)
+	- Show json
+
+*******************************************************************
+Now we will add some css to make our page look nice
 
 ----------------- Index.razor -----------------------
-
+```
 <div class="main">
     <ul class="pizza-cards">
         @if (specials != null)
@@ -46,17 +49,17 @@ https://github.com/dotnet-presentations/blazor-workshop
         }
     </ul>
 </div>
-
-----------------------------------------
-
-> Build and run
+```
+**Build and run**
 
 *******************************************************************
-> Now lets add navigation
-> Open MainLayout.razor and discuss
+Now lets add navigation
+
+Open MainLayout.razor and discuss
 
 -----------------  MainLayout.razor -----------------------
 
+```
 @inherits LayoutComponentBase
 
 <div class="top-bar">
@@ -71,19 +74,20 @@ https://github.com/dotnet-presentations/blazor-workshop
 <div class="content">
     @Body
 </div>
+```
 
-----------------------------------------
+Build and run
 
-> Build and run
-> Talk about Navlink
+Talk about Navlink
 
 *******************************************************************
-> Now we want to customize our pizza
-> Lets create a pizza customization dialog => Our first Blazor Component
+Now we want to customize our pizza
+Lets create a pizza customization dialog => Our first Blazor Component
 
-> Create ConfigurePizzaDialog.razor in Shared => This will be our first reuseable blazor component
+Create *ConfigurePizzaDialog.razor* in *Shared *=> This will be our first reuseable blazor component
 
 -----------------  ConfigurePizzaDialog.razor -----------------------
+```
 <div class="dialog-container">
     <div class="dialog">
         <div class="dialog-title">
@@ -104,21 +108,22 @@ https://github.com/dotnet-presentations/blazor-workshop
 @code {
 	[Parameter] public Pizza Pizza { get; set; }
 }
------------------  ConfigurePizzaDialog.razor -----------------------
-> Discuss Parameters
-> Show Pizza class
-> Discuss Binding
+```
 
-> Index.Razor
+Discuss Parameters
+Show Pizza class
+Discuss Binding
+
+------------------------ Index.Razor --------------------------------
 
 Replace <li ... with 
------------------ Index.razor -----------------------
+```
 <li @onclick="@(() => ShowConfigurePizzaDialog(special))" style="background-image: url('@special.ImageUrl')">
------------------ Index.razor -----------------------
+```
 
 in @Code add ...
 
------------------ Index.razor -----------------------
+```
     Pizza configuringPizza;
     bool showingConfigureDialog;
 
@@ -134,26 +139,26 @@ in @Code add ...
 
         showingConfigureDialog = true;
     }
------------------ Index.razor -----------------------
+```
 	
 At bottom of HTML add ...
 
------------------ Index.razor -----------------------
+```
 @if (showingConfigureDialog)
 {
     <ConfigurePizzaDialog Pizza="configuringPizza" />
 }
------------------ Index.razor -----------------------
+```
 
-
-> Build and Run to test dialog
+Build and Run to test dialog
 
 *******************************************************************
-> Now we will talk about two way Data Binding
-> Let's let the user choose the size of their pizza
-> Replace empty <form> with ...
+Now we will talk about two way Data Binding
+Let's let the user choose the size of their pizza
+Replace empty <form> with ...
 
 -----------------  ConfigurePizzaDialog.razor -----------------------
+```
 <form class="dialog-body">
     <div>
         <label>Size:</label>
@@ -163,7 +168,7 @@ At bottom of HTML add ...
         </span>
     </div>
 </form>
------------------  ConfigurePizzaDialog.razor -----------------------
+```
 
 So far we have been using just one way data binding
 @bind / @bind-value
@@ -176,21 +181,26 @@ Now lets give the user the ability to add toppings
 
 -----------------  ConfigurePizzaDialog.razor -----------------------
 
-> At top of page
+At top of page
 
+```
 @inject HttpClient HttpClient
+```
 
-> in @code
+in @code
 
+```
     List<Topping> toppings;
 
     protected async override Task OnInitializedAsync()
     {
         toppings = await HttpClient.GetJsonAsync<List<Topping>>("toppings");
     }
+```
 
->>>> Put this inside the <form class="dialog-body">, below the existing <div>."
+Put this inside the <form class="dialog-body">, below the existing <div>."
 
+```
 <div>
     <label>Extra Toppings:</label>
     @if (toppings == null)
@@ -225,9 +235,11 @@ Now lets give the user the ability to add toppings
         </div>
     }
 </div>
+```
 
->>>> Also add the following event handlers for topping selection and removal:
+Also add the following event handlers for topping selection and removal:
 
+```
 	void ToppingSelected(UIChangeEventArgs e)
 	{
 		if (int.TryParse((string)e.Value, out var index) && index >= 0)
@@ -248,22 +260,25 @@ Now lets give the user the ability to add toppings
 	{
 		Pizza.Toppings.RemoveAll(pt => pt.Topping == topping);
 	}
+```
 
->>> Walk through code
->>> Build and run
+Walk through code
+**Build and run**
 
 *******************************************************************
-Component Events
+#Component Events
 
-> Lets wire up the Cancel and Order buttons
-
+Lets wire up the Cancel and Order buttons
 
 -----------------  ConfigurePizzaDialog.razor -----------------------
+```
 [Parameter] public EventCallback OnCancel { get; set; }
 [Parameter] public EventCallback OnConfirm { get; set; }
+```
 
 Replace <div class="dialog-buttons"> with ...
 
+```
 <div class="dialog-buttons">
     <button class="btn btn-secondary mr-auto" @onclick="@OnCancel">Cancel</button>
     <span class="mr-center">
@@ -271,53 +286,60 @@ Replace <div class="dialog-buttons"> with ...
     </span>
     <button class="btn btn-success ml-auto" @onclick="@OnConfirm">Order ></button>
 </div>
------------------  ConfigurePizzaDialog.razor -----------------------
+```
 
-> Modify our reference to ConfigurePizzaDialog in our Index to handle the EventCallbacks
+Modify our reference to ConfigurePizzaDialog in our Index to handle the EventCallbacks
 
 ----------------- Index.razor -----------------------
-
+```
 <ConfigurePizzaDialog 
     Pizza="configuringPizza" 
     OnCancel="CancelConfigurePizzaDialog"  
     OnConfirm="ConfirmConfigurePizzaDialog" />
+```
+in @code add empty methods ...
 
-> in @code add empty methods ...
-	
-    void CancelConfigurePizzaDialog()
-    {
-    }
+```
+	void CancelConfigurePizzaDialog()
+	{
+	}
 
 	void ConfirmConfigurePizzaDialog()
 	{
 	}
-	
+```
+
 Add new variable ...
 
+```
 	Order order = new Order();
-	
+```
+
 CancelConfigurePizzaDialog ...
 
+```
 		configuringPizza = null;
 		showingConfigureDialog = false;
+```
 
 ConfirmConfigurePizzaDialog ...
 
+```
 		order.Pizzas.Add(configuringPizza);
 		configuringPizza = null;
 		showingConfigureDialog = false;
+```
 
------------------ Index.razor -----------------------
+**Build and Run**
 
-Build and Run
 Show cancel and order buttons working
 
 *******************************************************************
-> Now lets show the user their orders by creating a ConfiguredPizzaItem component
-> Create ConfiguredPizzaItem
+Now lets show the user their orders by creating a ConfiguredPizzaItem component
+Create ConfiguredPizzaItem
 
 ----------------- ConfiguredPizzaItem.razor -----------------------
-
+```
 <div class="cart-item">
     <a @onclick="@OnRemoved" class="delete-item">x</a>
     <div class="title">@(Pizza.Size)" @Pizza.Special.Name</div>
@@ -336,15 +358,13 @@ Show cancel and order buttons working
     [Parameter] public Pizza Pizza { get; set; }
     [Parameter] public EventCallback OnRemoved { get; set; }
 }
+```
 
------------------ ConfiguredPizzaItem.razor -----------------------
-
-[Explain code]
-
+Explain code
 Now lets add the new component to our page, just below <div class="main"> add a side bar
 
 ----------------- Index.razor -----------------------
-
+```
 <div class="sidebar">
     @if (order.Pizzas.Any())
     {
@@ -370,13 +390,12 @@ Now lets add the new component to our page, just below <div class="main"> add a 
         </button>
     </div>
 </div>
+```
+
+And add these new methods ...
 
 ----------------- Index.razor -----------------------
-
->>> And add these new methods ...
-
------------------ Index.razor -----------------------
-
+```
 	void RemoveConfiguredPizza(Pizza pizza)
 	{
 		order.Pizzas.Remove(pizza);
@@ -387,11 +406,9 @@ Now lets add the new component to our page, just below <div class="main"> add a 
 		await HttpClient.PostJsonAsync("orders", order);
 		order = new Order();
 	}
-
------------------ Index.razor -----------------------
-
+```
 Explain code
-Build and run
+**Build and run**
 
 *******************************************************************
 Now need to show the order status
@@ -400,6 +417,7 @@ Create MyOrders.razor page
 Add routing
 
 ----------------- MyOrders.razor -----------------------
+```
 @page "/myorders"
 @inject HttpClient HttpClient
 
@@ -448,28 +466,26 @@ Add routing
         ordersWithStatus = await HttpClient.GetJsonAsync<List<OrderWithStatus>>("orders");
     }
 }
------------------ MyOrders.razor -----------------------
+```
 
 Now lets modify the site navigation
 
 ----------------- MainLayout.razor -----------------------
-
+```
 <NavLink href="myorders" class="nav-tab">
     <img src="img/bike.svg" />
     <div>My Orders</div>
 </NavLink>
+```
+**Build and run**
 
------------------ MainLayout.razor -----------------------
-
-Build and run
 Show orders page with no orders
 Add some orders show page
 Click track button
 
-> Add OrderDetails.razor
-
 ----------------- OrderDetails.razor -----------------------
 
+```
 @page "/myorders/{orderId:int}"
 @using System.Threading
 @inject HttpClient HttpClient
@@ -547,12 +563,10 @@ Click track button
 		pollingCancellationToken?.Cancel();
 	}
 }
-
------------------ OrderDetails.razor -----------------------
+```
 
 Explain code - routing and disposing specifically
-
-Build and run
+**Build and run**
 Click Track Button
 
 *******************************************************************
@@ -562,7 +576,7 @@ Notice we want to show the order details, we will build another component for th
 Create OrderReview.razor in the shared folder
 
 ----------------- OrderReview.razor -----------------------
-
+```
 @foreach (var pizza in Order.Pizzas)
 {
     <p>
@@ -591,32 +605,32 @@ Create OrderReview.razor in the shared folder
 @code {
     [Parameter] public Order Order { get; set; }
 }
-
------------------ OrderReview.razor -----------------------
+```
 
 Then replace todo...
 
 ----------------- OrderDetails.razor -----------------------
-
+```
     <div class="track-order-details">
         <OrderReview Order="@orderWithStatus.Order" />
     </div>
+```
 
------------------ OrderDetails.razor -----------------------
-
-Build and run
+**Build and run**
 Show order details on tracking page
 
 *******************************************************************
 When we place an order, it should automatically navigate to that order...
 
------------------ Index.razor -----------------------
-
 Add ...
+
+----------------- Index.razor -----------------------
+```
 @inject IUriHelper UriHelper
-
-
+```
 Replace ...
+
+```
 async Task PlaceOrder()
 {
     var newOrderId = await HttpClient.PostJsonAsync<int>("orders", order);
@@ -624,25 +638,23 @@ async Task PlaceOrder()
 
     UriHelper.NavigateTo($"myorders/{newOrderId}");
 }
+```
 
 Explain
 
------------------ Index.razor -----------------------
-
-Build and run (Don't close though - show the AppState problem below first)
+**Build and run (Don't close though - show the AppState problem below first)**
 
 *******************************************************************
->>>> AppState pattern
+#AppState pattern
 
-A problem
-You might have noticed this already, but our application has a bug! Since we're storing the list of pizzas in the current order on the Index component, 
-the user's state can be lost if the user leaves the Index page. 
+A problem You might have noticed this already, but our application has a bug! Since we're storing the list of pizzas in the current order on the Index component, the user's state can be lost if the user leaves the Index page. 
 
 So we want to store the state of the order.  We can do this by adding an object to the DI container that you will use to coordinate state between related components.
 
 Create a new OrderState.cs in Client
 
 ----------------- OrderState.cs -----------------------
+```
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -702,43 +714,50 @@ namespace BlazingPizza.Client
 		}
     }
 }
------------------ OrderState.cs -----------------------
+```
 
 Register with the OrderState as a Scoped service in the DI container
-Because the AppState object is managed by the DI container, it can outlive the components and hold on to state even when the UI is changing 
-scoped means for the current unit-of-work
-Startup.cs !!!! IN THE CLIENT !!!
+Because the AppState object is managed by the DI container, it can outlive the components and hold on to state even when the UI is changing  scoped means for the current unit-of-work Startup.cs !!!! IN THE CLIENT !!!
 
 ----------------- Startup.cs -----------------------
+```
 	public void ConfigureServices(IServiceCollection services)
 	{
 		services.AddScoped<OrderState>();
 	}
------------------ Startup.cs -----------------------
+```
 
 Now that we have our OrderState regiistered
 
 ----------------- Index.razor -----------------------
+```
 @inject OrderState OrderState
+```
 ----------------- Index.razor -----------------------
 
 We now need to modify the Index.razor to use the OrderState instead of order
 
 ----------------- Index.razor -----------------------
 >> Delete (these are part of our OrderState now)
+
+```
     Pizza configuringPizza;
     bool showingConfigureDialog;
     Order order = new Order();
-
+```
 >> Delete Methods:
+
+```
 	void ShowConfigurePizzaDialog(PizzaSpecial special)	
-    void CancelConfigurePizzaDialog()
-    void ConfirmConfigurePizzaDialog()
-    void RemoveConfiguredPizza(Pizza pizza)
-	
->> Change markup to reference OrderState
+	void CancelConfigurePizzaDialog()
+	void ConfirmConfigurePizzaDialog()
+	void RemoveConfiguredPizza(Pizza pizza)
+```
+
+Change markup to reference OrderState
 
 ----------------- Index.razor -----------------------
+```
 <div class="main">
     <ul class="pizza-cards">
         @if (specials != null)
@@ -790,26 +809,24 @@ We now need to modify the Index.razor to use the OrderState instead of order
                           OnCancel="OrderState.CancelConfigurePizzaDialog"
                           OnConfirm="OrderState.ConfirmConfigurePizzaDialog" />
 }	
-
------------------ Index.cs -----------------------
+```
 
 Change PlaceOrder to reference OrderState
 
 ----------------- Index.razor -----------------------
-
+```
 	async Task PlaceOrder()
 	{
 		var newOrderId = await HttpClient.PostJsonAsync<int>("orders", OrderState.Order);
 		OrderState.ResetOrder();
 		UriHelper.NavigateTo($"myorders/{newOrderId}");
 	}
-
------------------ Index.razor -----------------------
+```
 
 Build and run - show AppState is fixed
 
 *******************************************************************
-Add Checkout process - to capture delivery address
+#Add Checkout process - to capture delivery address
 
 If you take a look at the Order class in BlazingPizza.Shared, you might notice that it holds a DeliveryAddress property of type Address. 
 However, nothing in the pizza ordering flow yet populates this data, so all your orders just have a blank delivery address.
@@ -819,6 +836,7 @@ It's time to fix this by adding a "checkout" screen that requires customers to e
 Add new page: Checkout.razor
 
 ----------------- Checkout.razor -----------------------
+```
 @page "/checkout"
 @inject HttpClient HttpClient
 @inject IUriHelper UriHelper;
@@ -845,29 +863,29 @@ Add new page: Checkout.razor
         UriHelper.NavigateTo($"myorders/{newOrderId}");
     }
 }
------------------ Checkout.razor -----------------------
+```
 
 Back in Index
 
 ----------------- Index.razor -----------------------
+Delete PlaceHolder method
+Replace Button with link ...
 
-> Delete PlaceHolder method
-> Replace Button with link ...
-
+```
 <a href="checkout" class="btn btn-warning" disabled="@(OrderState.Order.Pizzas.Count == 0)">
     Checkout >
 </a>
------------------ Index.razor -----------------------
+```
 
-Build and Run
+**Build and Run**
 
 *******************************************************************
-Now lets create a resusable Address Editor Component
+#Now lets create a resusable Address Editor Component
 
 Create: AddressEditor.razor in shared
 
 ----------------- AddressEditor.razor -----------------------
-
+```
 <div class="form-field">
     <label>Name:</label>
     <div>
@@ -913,29 +931,29 @@ Create: AddressEditor.razor in shared
 @code {
     [Parameter] public Address Address { get; set; }
 }
+```
 ----------------- AddressEditor.razor -----------------------
 
------------------ Checkout.razor -----------------------
 Inside <div class="checkout-cols"> below 1st div, add ...
 
-
+----------------- Checkout.razor -----------------------
+```
     <div class="checkout-delivery-address">
         <h4>Deliver to...</h4>
         <AddressEditor Address="@OrderState.Order.DeliveryAddress" />
     </div>
-
------------------ Checkout.razor -----------------------
-
-Build and Run
+```
+***Build and Run***
 Show that we can submit with no address
 
 *******************************************************************
-Adding Validation
+#Adding Validation
 
 1st add server side validation
 
 ----------------- Address.cs -----------------------
-		public int Id { get; set; }
+```
+	public int Id { get; set; }
 
         [Required, MaxLength(100)]
         public string Name { get; set; }
@@ -954,20 +972,22 @@ Adding Validation
 
         [Required, MaxLength(20)]
         public string PostalCode { get; set; }
------------------ Address.cs -----------------------
+```
 
-Build and Run 
+***Build and Run 
 Show 400 Bad Request
 
 *******************************************************************
-Now need to add client side validation
+#Now need to add client side validation
 
 To do that we will ...
 
 - add an EditForm component around contents of main div, 
 - With a <DataAnnotationsValidator /> and <ValidationSummary /> at the bottom of the EditForm
 - EditForm renders a form tag but also sets up an EditContext that tracks changs and helps with validation
+
 ----------------- Checkout.razor -----------------------
+```
     <EditForm Model="OrderState.Order.DeliveryAddress">
         <div class="checkout-cols">
             <div class="checkout-order-details">
@@ -988,9 +1008,8 @@ To do that we will ...
 		<DataAnnotationsValidator />
 		<ValidationSummary />
     </EditForm>
------------------ Checkout.razor -----------------------
-
-Build and Run
+```    
+**Build and Run**
 This is ugly, lets make it better
 
 ----------------- Checkout.razor -----------------------
@@ -1004,7 +1023,7 @@ Now in AddressEditor.razor
 Add ValidationMessage to each input item
 
 ----------------- AddressEditor.razor -----------------------
-
+```
 <div class="form-field">
     <label>Name:</label>
     <div>
@@ -1052,16 +1071,16 @@ Add ValidationMessage to each input item
         <ValidationMessage For="@(() => Address.PostalCode)" />
     </div>
 </div>
+```
 
------------------ AddressEditor.razor -----------------------
-
-Build and Run
+**Build and Run**
 But notice the error messages don't go away when we fill out the fields
 Lets fix that with InpuText component
 InputText isn't the only built-in input component. Others include InputCheckbox, InputDate, InputSelect, etc.
 Note: @bind changes to @bind-Value (note: upper case V)
 
 ----------------- AddressEditor.razor -----------------------
+```
 <div class="form-field">
     <label>Name:</label>
     <div>
@@ -1109,30 +1128,34 @@ Note: @bind changes to @bind-Value (note: upper case V)
         <ValidationMessage For="@(() => Address.PostalCode)" />
     </div>
 </div>
------------------ AddressEditor.razor -----------------------
+```
 
-Build and Run
+**Build and Run**
 Note: Red and Green can be styled
 
 **************************************************************************************************
-Authentication and Authorization
+#Authentication and Authorization
 
 The server side of our application has already been configured to do OAuth with Twitter
+
 Show: appsettings.Development.json
 Show: Startup.cs
 
-> We just need to turn it on
+We just need to turn it on
+
 ----------------- OrderController.cs -----------------------
 Uncomment [Authorize]
 ----------------- OrderController.cs -----------------------
 
-Build and run
+**Build and run**
+
 Try to view orders => we can no longer do anything with orders (because we are not authorized)
 
 So now we need to enforce authorization on the client side
 In client project create: ServerAuthenticationStateProvider.cs
 
 ----------------- ServerAuthenticationStateProvider.razor -----------------------
+```
 using Microsoft.AspNetCore.Components;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -1151,34 +1174,36 @@ namespace BlazingPizza.Client
         }
     }
 }
------------------ ServerAuthenticationStateProvider.razor -----------------------
+```
 
 Note: for now this is just a fake user
 
 Now register this with the DI service in Startup.cs
 
 ----------------- Startup.cs -----------------------
+```
     // Add auth services
     services.AddAuthorizationCore();
     services.AddScoped<AuthenticationStateProvider, ServerAuthenticationStateProvider>();
-
------------------ Startup.cs -----------------------
+```
 
 Modify App.Razor
 
 ----------------- App.Razor -----------------------
+```
 <CascadingAuthenticationState>
     <Router AppAssembly="typeof(Program).Assembly">
         <NotFoundContent>Page not found</NotFoundContent>
     </Router>
 </CascadingAuthenticationState>
------------------ App.Razor -----------------------
+```
 
 This has made available a cascading parameter to all descendant components. 
 
 Now create a new LoginDisplay component in Shared
 
 ----------------- LoginDisplay.Razor -----------------------
+```
 <div class="user-info">
     <AuthorizeView>
         <Authorizing>
@@ -1196,27 +1221,28 @@ Now create a new LoginDisplay component in Shared
         </NotAuthorized>
     </AuthorizeView>
 </div>
------------------ LoginDisplay.Razor -----------------------
-
+```
 <AuthorizeView> is a built-in component that displays different content depending on whether the user meets specified authorization conditions. 
 
 Now lets add the LoginDisplay component to the MainLayout
 
 ----------------- MainLayout.Razor -----------------------
+```
 <div class="top-bar">
     (... leave existing content in place ...)
 
     <LoginDisplay />
 </div>
------------------ MainLayout.Razor -----------------------
+```
 
-Build and Run
+**Build and Run**
 
 Note: you will not be able to sign-out or sign-in because this user is faked
 
 So now let's finish our ServerAuthenticationStateProvider ...
 
 ----------------- ServerAuthenticationStateProvider.cs -----------------------
+```
 using System.Net.Http;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -1245,12 +1271,11 @@ namespace BlazingPizza.Client
         }
     }
 }
+```
 ----------------- ServerAuthenticationStateProvider.cs -----------------------
-Build and Run
+**Build and Run**
 
 Test Sign-in
-	worthingtonjg@churchofjesuschrist.org
-	ABpWeJSa_dYBdy6*
 
 Test Sign-out
 
@@ -1259,6 +1284,7 @@ Sign-out: Notice we can still try to place an order when signed out - lets fix t
 ----------------- Checkout.razor -----------------------
 in @code add ...
 
+```
     [CascadingParameter] Task<AuthenticationState> AuthenticationStateTask { get; set; }
 
     protected override async Task OnInitializedAsync()
@@ -1271,9 +1297,11 @@ in @code add ...
             UriHelper.NavigateTo("user/signin?redirectUri=/checkout", true);
         }
     }
+```
 
 also need to modify the UI as follow (then explain) ...
 
+```
     <div class="main">
         <AuthorizeView Context="authContext">
             <NotAuthorized>
@@ -1302,10 +1330,9 @@ also need to modify the UI as follow (then explain) ...
             </Authorized>
         </AuthorizeView>
     </div>
+```
 
------------------ Checkout.razor -----------------------
-
-Build and run
+**Build and run**
 
 We've just introduced a pretty serious defect into the application. 
 Login redirect loses OrderState
@@ -1315,6 +1342,7 @@ Show sessionStorage.js
 
 Add SessionStorage.cs
 ----------------- SessionStorage.cs -----------------------
+```
 using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
@@ -1336,18 +1364,24 @@ namespace BlazingPizza.Client
             => jsRuntime.InvokeAsync<object>("blazorSessionStorage.delete", key);
     }
 }
+```
 ----------------- SessionStorage.cs -----------------------
 
 
 ----------------- Checkout.razor -----------------------
+```
 @inject IJSRuntime JSRuntime
+```
 
 Then, inside OnInitializedAsync, add the following line just above the UriHelper.NavigateTo call:
 
+```
 	await SessionStorage.SetAsync(JSRuntime, "currentorder", OrderState.Order);
-	
+```
+
 At the bottom of OnInitializedAsync ...
 
+```
         // Try to recover any temporary saved order
         if (!OrderState.Order.Pizzas.Any())
         {
@@ -1363,14 +1397,11 @@ At the bottom of OnInitializedAsync ...
                 UriHelper.NavigateTo("");
             }
         }
------------------ Checkout.razor -----------------------
+```
 
-Build and Run
+**Build and Run**
 
 Now you should no longer be able to reproduce the "lost order state" bug. Your order should be preserved across the redirection flow.
-
-	worthingtonjg@churchofjesuschrist.org
-	ABpWeJSa_dYBdy6*
 
 Sign-out and Visit My Orders => Request will be rejected
 
@@ -1383,7 +1414,9 @@ You can place an [Authorize] attribute on a routable @page component.
 This is useful if you want to control the reachability of an entire page based on authorization conditions.
 
 ----------------- MyOrders.razor -----------------------
+```
 @attribute [Authorize]
+```
 ----------------- MyOrders.razor -----------------------
 
 Build and run
@@ -1392,6 +1425,7 @@ Go to My Orders and show Not Authorized
 We can do better than that ...
 
 ----------------- App.razor -----------------------
+```
 <CascadingAuthenticationState>
     <Router AppAssembly="typeof(Program).Assembly">
         <NotFoundContent>Page not found</NotFoundContent>
@@ -1409,32 +1443,35 @@ We can do better than that ...
         </AuthorizingContent>
     </Router>
 </CascadingAuthenticationState>
------------------ App.razor -----------------------
+```
 
-Build and Run
+**Build and Run**
 Now if you're logged out and try to go to My orders, you'll get a much nicer outcome
 
 While signed out ... navigate to: /myorders/1
 
 ----------------- OrderDetails.razor -----------------------
+```
 @attribute [Authorize]
+```
 ----------------- OrderDetails.razor -----------------------
 
-Build and Run
-
+**Build and Run**
 
 **********************************************************************
-Authorization
+#Authorization
 
 Although the server requires authentication before accepting queries for order information, it still doesn't distinguish between users. 
 All signed-in users can see the orders from all other signed-in users. We have authentication, but no authorization!
 
+```
 OrdersController => order.UserId = GetUserId()
+```
 
 Now each order will be stamped with the ID of the user who owns it.
 
 ***********************************************************************
-More on Javascript Interop
+#More on Javascript Interop
 
 Users of the pizza store can now track the status of their orders in real time. In this session we'll use JavaScript interop to add a 
 real-time map to the order status page that answers the age old question, "Where's my pizza?!?".
@@ -1446,6 +1483,7 @@ In this situation we already have a map built using javascript, and just want to
 Add new component to shared:  Map.razor
 
 ----------------- Map.razor -----------------------
+```
 @using Microsoft.JSInterop
 @inject IJSRuntime JSRuntime
 
@@ -1465,22 +1503,24 @@ Add new component to shared:  Map.razor
             Markers);
     }
 }
------------------ Map.razor -----------------------
+```
 
 Explain code
 
 Add the Map component to the OrderDetails page by adding the following just below the track-order-details div:
 
 ----------------- OrderDetails.razor -----------------------
+```
 <div class="track-order-map">
     <Map Zoom="13" Markers="orderWithStatus.MapMarkers" />
 </div>
+```
 ----------------- OrderDetails.razor -----------------------
 
-https://github.com/dotnet-presentations/blazor-workshop
-https://docs.microsoft.com/en-us/aspnet/core/blazor/?view=aspnetcore-3.0
-
-Shift+F2
+Notes:
+- https://github.com/dotnet-presentations/blazor-workshop
+- https://docs.microsoft.com/en-us/aspnet/core/blazor/?view=aspnetcore-3.0
+- Shortcut Reminder: Shift+F2
 
 
 
