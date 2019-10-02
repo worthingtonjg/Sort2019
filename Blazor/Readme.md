@@ -854,7 +854,7 @@ Change markup to reference OrderState
 
 Change PlaceOrder to reference OrderState
 
------------------ Index.razor -----------------------
+**----------------- Index.razor -----------------------**
 ```
 	async Task PlaceOrder()
 	{
@@ -867,7 +867,7 @@ Change PlaceOrder to reference OrderState
 Build and run - show AppState is fixed
 
 ---
-#Add Checkout process - to capture delivery address
+# Add Checkout process - to capture delivery address
 
 If you take a look at the Order class in BlazingPizza.Shared, you might notice that it holds a DeliveryAddress property of type Address. 
 
@@ -1185,7 +1185,9 @@ The server side of our application has already been configured to do OAuth with 
 We just need to turn it on
 
 **----------------- OrderController.cs -----------------------**
+
 Uncomment `[Authorize]`
+
 **----------------- OrderController.cs -----------------------**
 
 **Build and run**
@@ -1323,6 +1325,7 @@ Test Sign-out
 Sign-out: Notice we can still try to place an order when signed out - lets fix that
 
 **----------------- Checkout.razor -----------------------**
+
 in @code add ...
 
 ```
@@ -1384,6 +1387,7 @@ Fix it with session Storage
 Show sessionStorage.js
 
 Add SessionStorage.cs
+
 **----------------- SessionStorage.cs -----------------------**
 ```
 using Microsoft.JSInterop;
@@ -1449,7 +1453,9 @@ Sign-out and Visit My Orders => Request will be rejected
 Don't close app yet - do next step
 
 ---
-Signout and show MyOrders - just says loading...
+# Signout and show MyOrders 
+
+Just says loading...
 
 This is because we are not authorized
 
@@ -1503,8 +1509,8 @@ While signed out ... navigate to: /myorders/1
 
 **Build and Run**
 
-**********************************************************************
-#Authorization
+---
+# Authorization
 
 Although the server requires authentication before accepting queries for order information, it still doesn't distinguish between users. 
 All signed-in users can see the orders from all other signed-in users. We have authentication, but no authorization!
@@ -1554,7 +1560,7 @@ Explain code
 
 Add the Map component to the *OrderDetails* page by adding the following just below the `track-order-details` div:
 
-** ----------------- OrderDetails.razor -----------------------
+**----------------- OrderDetails.razor -----------------------**
 ```
 <div class="track-order-map">
     <Map Zoom="13" Markers="orderWithStatus.MapMarkers" />
