@@ -13,6 +13,8 @@ https://github.com/dotnet-presentations/blazor-workshop
 
 I have created a modified starting point to simplify some of the steps so that the presentation would go smoother and be compressed to an hour and a half.  If you are trying to follow my version of this walk-through you may want to use my starting point, otherwise use theirs.
 
+I am also using a preview version of Blazor and Visual Studio 2019, so you may be better off taking the code directly from the workshop link above, since they will likely keep it updated as Blazor moves forward.
+
 https://github.com/worthingtonjg/Sort2019/blob/master/Blazor/00-Starting-point.zip
 
 ### Powerpoint
@@ -321,7 +323,7 @@ Replace `<div class="dialog-buttons">` with ...
 
 Modify our reference to ConfigurePizzaDialog in our Index to handle the EventCallbacks
 
------------------ Index.razor -----------------------
+**----------------- Index.razor -----------------------**
 ```
 <ConfigurePizzaDialog 
     Pizza="configuringPizza" 
@@ -365,11 +367,11 @@ ConfirmConfigurePizzaDialog ...
 
 Show cancel and order buttons working
 
-*******************************************************************
-Now lets show the user their orders by creating a ConfiguredPizzaItem component
-Create ConfiguredPizzaItem
+---
+- Now lets show the user their orders by creating a ConfiguredPizzaItem component
+- Create ConfiguredPizzaItem
 
------------------ ConfiguredPizzaItem.razor -----------------------
+**----------------- ConfiguredPizzaItem.razor -----------------------**
 ```
 <div class="cart-item">
     <a @onclick="@OnRemoved" class="delete-item">x</a>
@@ -392,9 +394,10 @@ Create ConfiguredPizzaItem
 ```
 
 Explain code
+
 Now lets add the new component to our page, just below <div class="main"> add a side bar
 
------------------ Index.razor -----------------------
+**----------------- Index.razor -----------------------**
 ```
 <div class="sidebar">
     @if (order.Pizzas.Any())
@@ -425,7 +428,7 @@ Now lets add the new component to our page, just below <div class="main"> add a 
 
 And add these new methods ...
 
------------------ Index.razor -----------------------
+**----------------- Index.razor -----------------------**
 ```
 	void RemoveConfiguredPizza(Pizza pizza)
 	{
@@ -439,15 +442,16 @@ And add these new methods ...
 	}
 ```
 Explain code
+
 **Build and run**
 
-*******************************************************************
+---
 Now need to show the order status
 Lets implement a My Orders page
 Create MyOrders.razor page
 Add routing
 
------------------ MyOrders.razor -----------------------
+**----------------- MyOrders.razor -----------------------**
 ```
 @page "/myorders"
 @inject HttpClient HttpClient
@@ -501,7 +505,7 @@ Add routing
 
 Now lets modify the site navigation
 
------------------ MainLayout.razor -----------------------
+**----------------- MainLayout.razor -----------------------**
 ```
 <NavLink href="myorders" class="nav-tab">
     <img src="img/bike.svg" />
@@ -510,11 +514,11 @@ Now lets modify the site navigation
 ```
 **Build and run**
 
-Show orders page with no orders
-Add some orders show page
-Click track button
+- Show orders page with no orders
+- Add some orders show page
+- Click track button
 
------------------ OrderDetails.razor -----------------------
+**----------------- OrderDetails.razor -----------------------**
 
 ```
 @page "/myorders/{orderId:int}"
@@ -596,15 +600,14 @@ Click track button
 }
 ```
 
-Explain code - routing and disposing specifically
-**Build and run**
-Click Track Button
+- Explain code - routing and disposing specifically
+- **Build and run**
+- Click Track Button
 
 *******************************************************************
-TODO: show more details
-Notice we want to show the order details, we will build another component for that
-
-Create OrderReview.razor in the shared folder
+- Point out the TODO: show more details
+- Notice we want to show the order details, we will build another component for that
+- Create OrderReview.razor in the shared folder
 
 ----------------- OrderReview.razor -----------------------
 ```
@@ -647,8 +650,8 @@ Then replace todo...
     </div>
 ```
 
-**Build and run**
-Show order details on tracking page
+- **Build and run**
+- Show order details on tracking page
 
 *******************************************************************
 When we place an order, it should automatically navigate to that order...
@@ -684,7 +687,7 @@ So we want to store the state of the order.  We can do this by adding an object 
 
 Create a new OrderState.cs in Client
 
------------------ OrderState.cs -----------------------
+**----------------- OrderState.cs -----------------------**
 ```
 using System;
 using System.Collections.Generic;
@@ -750,7 +753,7 @@ namespace BlazingPizza.Client
 Register with the OrderState as a Scoped service in the DI container
 Because the AppState object is managed by the DI container, it can outlive the components and hold on to state even when the UI is changing  scoped means for the current unit-of-work Startup.cs !!!! IN THE CLIENT !!!
 
------------------ Startup.cs -----------------------
+**----------------- Startup.cs -----------------------**
 ```
 	public void ConfigureServices(IServiceCollection services)
 	{
@@ -768,15 +771,15 @@ Now that we have our OrderState regiistered
 
 We now need to modify the Index.razor to use the OrderState instead of order
 
------------------ Index.razor -----------------------
->> Delete (these are part of our OrderState now)
+Delete (these are part of our OrderState now)
 
+**----------------- Index.razor -----------------------**
 ```
     Pizza configuringPizza;
     bool showingConfigureDialog;
     Order order = new Order();
 ```
->> Delete Methods:
+Delete Methods:
 
 ```
 	void ShowConfigurePizzaDialog(PizzaSpecial special)	
@@ -787,7 +790,7 @@ We now need to modify the Index.razor to use the OrderState instead of order
 
 Change markup to reference OrderState
 
------------------ Index.razor -----------------------
+**----------------- Index.razor -----------------------**
 ```
 <div class="main">
     <ul class="pizza-cards">
@@ -856,17 +859,18 @@ Change PlaceOrder to reference OrderState
 
 Build and run - show AppState is fixed
 
-*******************************************************************
+---
 #Add Checkout process - to capture delivery address
 
 If you take a look at the Order class in BlazingPizza.Shared, you might notice that it holds a DeliveryAddress property of type Address. 
+
 However, nothing in the pizza ordering flow yet populates this data, so all your orders just have a blank delivery address.
 
 It's time to fix this by adding a "checkout" screen that requires customers to enter a valid address.
 
 Add new page: Checkout.razor
 
------------------ Checkout.razor -----------------------
+**----------------- Checkout.razor -----------------------**
 ```
 @page "/checkout"
 @inject HttpClient HttpClient
@@ -898,10 +902,11 @@ Add new page: Checkout.razor
 
 Back in Index
 
------------------ Index.razor -----------------------
 Delete PlaceHolder method
+
 Replace Button with link ...
 
+**----------------- Index.razor -----------------------**
 ```
 <a href="checkout" class="btn btn-warning" disabled="@(OrderState.Order.Pizzas.Count == 0)">
     Checkout >
@@ -911,11 +916,11 @@ Replace Button with link ...
 **Build and Run**
 
 *******************************************************************
-#Now lets create a resusable Address Editor Component
+# Now lets create a resusable Address Editor Component
 
 Create: AddressEditor.razor in shared
 
------------------ AddressEditor.razor -----------------------
+**----------------- AddressEditor.razor -----------------------**
 ```
 <div class="form-field">
     <label>Name:</label>
@@ -963,22 +968,21 @@ Create: AddressEditor.razor in shared
     [Parameter] public Address Address { get; set; }
 }
 ```
------------------ AddressEditor.razor -----------------------
 
 Inside <div class="checkout-cols"> below 1st div, add ...
 
------------------ Checkout.razor -----------------------
+**----------------- Checkout.razor -----------------------**
 ```
     <div class="checkout-delivery-address">
         <h4>Deliver to...</h4>
         <AddressEditor Address="@OrderState.Order.DeliveryAddress" />
     </div>
 ```
-***Build and Run***
-Show that we can submit with no address
+- ***Build and Run***
+- Show that we can submit with no address
 
-*******************************************************************
-#Adding Validation
+---
+# Adding Validation
 
 1st add server side validation
 
@@ -1005,11 +1009,11 @@ Show that we can submit with no address
         public string PostalCode { get; set; }
 ```
 
-***Build and Run 
-Show 400 Bad Request
+- **Build and Run**
+- Show 400 Bad Request
 
 *******************************************************************
-#Now need to add client side validation
+# Now need to add client side validation
 
 To do that we will ...
 
@@ -1017,7 +1021,7 @@ To do that we will ...
 - With a <DataAnnotationsValidator /> and <ValidationSummary /> at the bottom of the EditForm
 - EditForm renders a form tag but also sets up an EditContext that tracks changs and helps with validation
 
------------------ Checkout.razor -----------------------
+**----------------- Checkout.razor -----------------------**
 ```
     <EditForm Model="OrderState.Order.DeliveryAddress">
         <div class="checkout-cols">
@@ -1040,20 +1044,19 @@ To do that we will ...
 		<ValidationSummary />
     </EditForm>
 ```    
-**Build and Run**
-This is ugly, lets make it better
+- **Build and Run**
+- This is ugly, lets make it better
 
------------------ Checkout.razor -----------------------
-Remove:  <ValidationSummary />
-Change EditForm tag: add OnValidSubmit="PlaceOrder"
-Change button to submit and remove onclick: <button type="submit">
------------------ Checkout.razor -----------------------
+**----------------- Checkout.razor -----------------------**
+- Remove:  <ValidationSummary />
+- Change EditForm tag: add OnValidSubmit="PlaceOrder"
+- Change button to submit and remove onclick: <button type="submit">
 
 Now in AddressEditor.razor
 
 Add ValidationMessage to each input item
 
------------------ AddressEditor.razor -----------------------
+**----------------- AddressEditor.razor -----------------------**
 ```
 <div class="form-field">
     <label>Name:</label>
@@ -1104,13 +1107,13 @@ Add ValidationMessage to each input item
 </div>
 ```
 
-**Build and Run**
-But notice the error messages don't go away when we fill out the fields
-Lets fix that with InpuText component
-InputText isn't the only built-in input component. Others include InputCheckbox, InputDate, InputSelect, etc.
-Note: @bind changes to @bind-Value (note: upper case V)
+- **Build and Run**
+- But notice the error messages don't go away when we fill out the fields
+- Lets fix that with InpuText component
+- InputText isn't the only built-in input component. Others include InputCheckbox, InputDate, InputSelect, etc.
+- Note: @bind changes to @bind-Value (note: upper case V)
 
------------------ AddressEditor.razor -----------------------
+**----------------- AddressEditor.razor -----------------------**
 ```
 <div class="form-field">
     <label>Name:</label>
@@ -1161,31 +1164,31 @@ Note: @bind changes to @bind-Value (note: upper case V)
 </div>
 ```
 
-**Build and Run**
-Note: Red and Green can be styled
+- **Build and Run**
+- Note: Red and Green can be styled
 
-**************************************************************************************************
-#Authentication and Authorization
+---
+# Authentication and Authorization
 
 The server side of our application has already been configured to do OAuth with Twitter
 
-Show: appsettings.Development.json
-Show: Startup.cs
+- Show: appsettings.Development.json
+- Show: Startup.cs
 
 We just need to turn it on
 
------------------ OrderController.cs -----------------------
-Uncomment [Authorize]
------------------ OrderController.cs -----------------------
+**----------------- OrderController.cs -----------------------**
+Uncomment `[Authorize]`
+**----------------- OrderController.cs -----------------------**
 
 **Build and run**
 
 Try to view orders => we can no longer do anything with orders (because we are not authorized)
 
-So now we need to enforce authorization on the client side
-In client project create: ServerAuthenticationStateProvider.cs
+- So now we need to enforce authorization on the client side
+- In client project create: ServerAuthenticationStateProvider.cs
 
------------------ ServerAuthenticationStateProvider.razor -----------------------
+**----------------- ServerAuthenticationStateProvider.razor -----------------------**
 ```
 using Microsoft.AspNetCore.Components;
 using System.Security.Claims;
@@ -1211,7 +1214,7 @@ Note: for now this is just a fake user
 
 Now register this with the DI service in Startup.cs
 
------------------ Startup.cs -----------------------
+**----------------- Startup.cs -----------------------**
 ```
     // Add auth services
     services.AddAuthorizationCore();
@@ -1220,7 +1223,7 @@ Now register this with the DI service in Startup.cs
 
 Modify App.Razor
 
------------------ App.Razor -----------------------
+**----------------- App.Razor -----------------------**
 ```
 <CascadingAuthenticationState>
     <Router AppAssembly="typeof(Program).Assembly">
@@ -1233,7 +1236,7 @@ This has made available a cascading parameter to all descendant components.
 
 Now create a new LoginDisplay component in Shared
 
------------------ LoginDisplay.Razor -----------------------
+**----------------- LoginDisplay.Razor -----------------------**
 ```
 <div class="user-info">
     <AuthorizeView>
@@ -1257,7 +1260,7 @@ Now create a new LoginDisplay component in Shared
 
 Now lets add the LoginDisplay component to the MainLayout
 
------------------ MainLayout.Razor -----------------------
+**----------------- MainLayout.Razor -----------------------**
 ```
 <div class="top-bar">
     (... leave existing content in place ...)
@@ -1272,7 +1275,7 @@ Note: you will not be able to sign-out or sign-in because this user is faked
 
 So now let's finish our ServerAuthenticationStateProvider ...
 
------------------ ServerAuthenticationStateProvider.cs -----------------------
+**----------------- ServerAuthenticationStateProvider.cs -----------------------**
 ```
 using System.Net.Http;
 using System.Security.Claims;
@@ -1303,7 +1306,7 @@ namespace BlazingPizza.Client
     }
 }
 ```
------------------ ServerAuthenticationStateProvider.cs -----------------------
+
 **Build and Run**
 
 Test Sign-in
@@ -1312,7 +1315,7 @@ Test Sign-out
 
 Sign-out: Notice we can still try to place an order when signed out - lets fix that
 
------------------ Checkout.razor -----------------------
+**----------------- Checkout.razor -----------------------**
 in @code add ...
 
 ```
@@ -1374,7 +1377,7 @@ Fix it with session Storage
 Show sessionStorage.js
 
 Add SessionStorage.cs
------------------ SessionStorage.cs -----------------------
+**----------------- SessionStorage.cs -----------------------**
 ```
 using Microsoft.JSInterop;
 using System;
@@ -1398,10 +1401,8 @@ namespace BlazingPizza.Client
     }
 }
 ```
------------------ SessionStorage.cs -----------------------
 
-
------------------ Checkout.razor -----------------------
+**----------------- Checkout.razor -----------------------**
 ```
 @inject IJSRuntime JSRuntime
 ```
@@ -1440,7 +1441,7 @@ Sign-out and Visit My Orders => Request will be rejected
 
 Don't close app yet - do next step
 
-**************************************************************
+---
 Signout and show MyOrders - just says loading...
 
 This is because we are not authorized
