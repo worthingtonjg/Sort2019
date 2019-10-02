@@ -34,15 +34,18 @@ Show how to add a new page
 
 Show MatchPage
 
-Build and run
+**Build and run**
 
 Stop
 
-**--------------------------------- Match Page ---------------------------------**
+---
+# Match Page
 
 So let’s start making our match page.
 
 To do that let’s start in our view model
+
+Open *MatchPageViewModel.cs*
 
 We want to be able to Start a Match and End a Match, do that we will need some variables to keep track of our match
 
@@ -163,7 +166,7 @@ Notice another binding error for the StartMatchCommand
 
 Lets fix the binding error
 
-Stop
+**Stop**
 
 We can’t bind to a list of Player, lets replace it with a view model that has a selected property
 
@@ -270,7 +273,8 @@ Add at bottom
             </Grid>
 ```
 
-**--------------------------------- Navigation ---------------------------------**
+---
+# Navigation
 
 So now let’s add some more tabs to our MainPage for stats, players and flics …
 
@@ -313,7 +317,8 @@ Click on stats tab (don’t click on players or flics)
 
 Now we will implement the stats page (since that is an easy one)
 
-**--------------------------------- Stats Page ---------------------------------**
+---
+# Stats Page
 
 ```
         <Grid>
@@ -325,7 +330,8 @@ Now we will implement the stats page (since that is an easy one)
 
 Stop
 
-**--------------------------------- Players Page ---------------------------------**
+---
+# Players Page
 
 Now lets start our players page
 
@@ -462,11 +468,17 @@ Now lets make delete work …
 
 **Build and Run**
 
+---
+# Flic Page
+
 The Flic page, is exactly the same code as the Player page - show view model briefly
 
 We are reusing the same AddItemPage to add Flics
 
 Build and show Flic page
+
+---
+# Conclusion
 
 There is a lot more to Xamarin Forms, but this gives a good idea of how it works and how to get started.
 
