@@ -46,10 +46,10 @@ Explain Bootstrap process (at least as best as I understand it) ...
 ```
 
 ---
-# Our First Blazor Page
+# Lets Look at Our First Blazor Page
 
-Open Index.Razor
-- Talk about Razor Component
+Open *Index.Razor* and talk about
+- Razor Components
 - Pages => Routing => @page
 - Inject => Dependency Injection
 - @ Razor
@@ -115,10 +115,11 @@ Open MainLayout.razor and discuss
 - Talk about Navlink
 
 ---
-# Now we want to customize our pizza
+# Now let's add our first shared component
+
 Lets create a pizza customization dialog => Our first Blazor Component
 
-Create *ConfigurePizzaDialog.razor* in *Shared* => This will be our first reuseable blazor component
+Create *ConfigurePizzaDialog.razor* in *Shared* 
 
 **-----------------  ConfigurePizzaDialog.razor -----------------------**
 ```
@@ -187,7 +188,8 @@ At bottom of HTML add ...
 **Build and Run to test dialog**
 
 ---
-- Now we will talk about two way Data Binding
+# Now we will talk about two way Data Binding
+
 - Let's let the user choose the size of their pizza
 - Replace empty <form> with ...
 
@@ -368,8 +370,9 @@ ConfirmConfigurePizzaDialog ...
 Show cancel and order buttons working
 
 ---
-- Now lets show the user their orders by creating a ConfiguredPizzaItem component
-- Create ConfiguredPizzaItem
+# Now lets show the user their orders by creating a ConfiguredPizzaItem component
+
+- Create *ConfiguredPizzaItem.razor*
 
 **----------------- ConfiguredPizzaItem.razor -----------------------**
 ```
@@ -446,10 +449,11 @@ Explain code
 **Build and run**
 
 ---
-Now need to show the order status
-Lets implement a My Orders page
-Create MyOrders.razor page
-Add routing
+# Now need to show the order status
+
+- Lets implement a My Orders page
+- Create *MyOrders.razor* page
+- Add routing
 
 **----------------- MyOrders.razor -----------------------**
 ```
@@ -609,7 +613,7 @@ Now lets modify the site navigation
 - Notice we want to show the order details, we will build another component for that
 - Create OrderReview.razor in the shared folder
 
------------------ OrderReview.razor -----------------------
+**----------------- OrderReview.razor -----------------------**
 ```
 @foreach (var pizza in Order.Pizzas)
 {
@@ -654,11 +658,13 @@ Then replace todo...
 - Show order details on tracking page
 
 *******************************************************************
+# Automatic Navigation
+
 When we place an order, it should automatically navigate to that order...
 
 Add ...
 
------------------ Index.razor -----------------------
+**----------------- Index.razor -----------------------**
 ```
 @inject IUriHelper UriHelper
 ```
@@ -678,8 +684,8 @@ Explain
 
 **Build and run (Don't close though - show the AppState problem below first)**
 
-*******************************************************************
-#AppState pattern
+---
+# AppState pattern
 
 A problem You might have noticed this already, but our application has a bug! Since we're storing the list of pizzas in the current order on the Index component, the user's state can be lost if the user leaves the Index page. 
 
@@ -751,6 +757,7 @@ namespace BlazingPizza.Client
 ```
 
 Register with the OrderState as a Scoped service in the DI container
+
 Because the AppState object is managed by the DI container, it can outlive the components and hold on to state even when the UI is changing  scoped means for the current unit-of-work Startup.cs !!!! IN THE CLIENT !!!
 
 **----------------- Startup.cs -----------------------**
