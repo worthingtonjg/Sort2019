@@ -1,8 +1,18 @@
 # Introduction
 
+This is a presentation I gave at the SORT 2019 conference.  It introduced the group to Xamarin Forms and cross platform development using C#
+
 # Starting Point
+The Starting Point zip file is the starting point for the project - if you want to do the walk through on your own you will want to start here.
+
+https://github.com/worthingtonjg/Sort2019/blob/master/XamarinForms/00-Starting-point.zip
 
 # Powerpoint
+
+The powerpoint for my presentation is:
+
+https://github.com/worthingtonjg/Sort2019/blob/master/XamarinForms/Final%20-%20Xamarin%20Forms%20-%20Sort%202019%20-%20Jon%20Worthington.pptx
+
 
 # Xamarin Forms Walkthrough
 
