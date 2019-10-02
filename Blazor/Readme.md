@@ -1,7 +1,7 @@
 
 # Introduction
 
-This was a presentation I gave that the SORT 2019 conference.  It introduced the group to Web Assembly and Blazor.
+This is a presentation I gave at the SORT 2019 conference.  It introduced the group to Web Assembly and C#/Blazor on the client side.
 
 ### Workshop Link
 
