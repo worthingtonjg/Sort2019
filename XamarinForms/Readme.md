@@ -13,6 +13,14 @@ The powerpoint for my presentation is:
 
 https://github.com/worthingtonjg/Sort2019/blob/master/XamarinForms/Final%20-%20Xamarin%20Forms%20-%20Sort%202019%20-%20Jon%20Worthington.pptx
 
+# Pre-session Pre
+
+- Open powerpoint
+- Open https://rbscorekeeper.azurewebsites.net
+- Open https://rbscorekeeper.azurewebsites.net/swagger
+- Open starting point and build on both android and ios
+- Open finished app and have it running
+- Connect and test bluetooth buttons and finished app
 
 # Xamarin Forms Walkthrough
 
