@@ -522,6 +522,8 @@ Now lets modify the site navigation
 - Add some orders show page
 - Click track button
 
+Now lets add OrderDetails.razor
+
 **----------------- OrderDetails.razor -----------------------**
 
 ```
