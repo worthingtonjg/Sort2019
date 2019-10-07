@@ -398,7 +398,7 @@ Show cancel and order buttons working
 
 Explain code
 
-Now lets add the new component to our page, just below <div class="main"> add a side bar
+Now lets add the new component to our page, just below `<div class="main">` add a side bar
 
 **----------------- Index.razor -----------------------**
 ```
