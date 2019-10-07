@@ -1057,9 +1057,9 @@ To do that we will ...
 - This is ugly, lets make it better
 
 **----------------- Checkout.razor -----------------------**
-- Remove:  <ValidationSummary />
-- Change EditForm tag: add OnValidSubmit="PlaceOrder"
-- Change button to submit and remove onclick: <button type="submit">
+- Remove:  `<ValidationSummary />`
+- Change EditForm tag: add `OnValidSubmit="PlaceOrder"`
+- Change button to submit and remove onclick: `<button type="submit">`
 
 Now in AddressEditor.razor
 
