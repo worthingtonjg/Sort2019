@@ -978,7 +978,7 @@ Create: AddressEditor.razor in shared
 }
 ```
 
-Inside <div class="checkout-cols"> below 1st div, add ...
+Inside `<div class="checkout-cols">` below 1st div, add ...
 
 **----------------- Checkout.razor -----------------------**
 ```
