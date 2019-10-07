@@ -233,7 +233,7 @@ in @code
     }
 ```
 
-Put this inside the <form class="dialog-body">, below the existing DIV block
+Put this inside the `<form class="dialog-body">`, below the existing DIV block
 
 ```
 <div>
