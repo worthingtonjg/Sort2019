@@ -24,6 +24,14 @@ The powerpoint for my presentation is:
 https://github.com/worthingtonjg/Sort2019/blob/master/Blazor/Final%20-%20Blazor%20-%20Sort%202019%20-%20Jon%20Worthington.pptx
 
 ---
+Pre-Session Prep
+
+- Open powerpoint
+- Make sure starting point is extracted and open in visual studio preview
+- Make sure final web app is open and running
+- Have link to blazor workshop up: https://github.com/dotnet-presentations/blazor-workshop
+
+---
 # Start Demo
 
 Start by walking through starting point code:
