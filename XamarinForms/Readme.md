@@ -13,7 +13,7 @@ The powerpoint for my presentation is:
 
 https://github.com/worthingtonjg/Sort2019/blob/master/XamarinForms/Final%20-%20Xamarin%20Forms%20-%20Sort%202019%20-%20Jon%20Worthington.pptx
 
-# Pre-session Pre
+# Pre-session Prep
 
 - Open powerpoint
 - Open https://rbscorekeeper.azurewebsites.net
