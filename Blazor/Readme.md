@@ -24,6 +24,14 @@ The powerpoint for my presentation is:
 https://github.com/worthingtonjg/Sort2019/blob/master/Blazor/Final%20-%20Blazor%20-%20Sort%202019%20-%20Jon%20Worthington.pptx
 
 ---
+# Pre-Session Prep
+
+- Open powerpoint
+- Make sure starting point is extracted and open in visual studio preview
+- Make sure final web app is open and running
+- Have link to blazor workshop up: https://github.com/dotnet-presentations/blazor-workshop
+
+---
 # Start Demo
 
 Start by walking through starting point code:
@@ -191,7 +199,7 @@ At bottom of HTML add ...
 # Now we will talk about two way Data Binding
 
 - Let's let the user choose the size of their pizza
-- Replace empty <form> with ...
+- Replace empty `<form>` with ...
 
 **-----------------  ConfigurePizzaDialog.razor -----------------------**
 ```
@@ -233,7 +241,7 @@ in @code
     }
 ```
 
-Put this inside the <form class="dialog-body">, below the existing DIV block
+Put this inside the `<form class="dialog-body">`, below the existing DIV block
 
 ```
 <div>
@@ -323,7 +331,7 @@ Replace `<div class="dialog-buttons">` with ...
 </div>
 ```
 
-Modify our reference to ConfigurePizzaDialog in our Index to handle the EventCallbacks
+Modify our reference to *ConfigurePizzaDialog* in our Index to handle the EventCallbacks
 
 **----------------- Index.razor -----------------------**
 ```
@@ -398,7 +406,7 @@ Show cancel and order buttons working
 
 Explain code
 
-Now lets add the new component to our page, just below <div class="main"> add a side bar
+Now lets add the new component to our page, just below `<div class="main">` add a side bar
 
 **----------------- Index.razor -----------------------**
 ```
@@ -451,8 +459,8 @@ Explain code
 ---
 # Now need to show the order status
 
-- Lets implement a My Orders page
-- Create *MyOrders.razor* page
+- Lets implement a My Orders page component
+- Create *MyOrders.razor* page component
 - Add routing
 
 **----------------- MyOrders.razor -----------------------**
@@ -521,6 +529,8 @@ Now lets modify the site navigation
 - Show orders page with no orders
 - Add some orders show page
 - Click track button
+
+Now lets add *OrderDetails.razor* as a new *page* component
 
 **----------------- OrderDetails.razor -----------------------**
 
@@ -611,7 +621,7 @@ Now lets modify the site navigation
 *******************************************************************
 - Point out the TODO: show more details
 - Notice we want to show the order details, we will build another component for that
-- Create OrderReview.razor in the shared folder
+- Create *OrderReview.razor* as a *shared* component
 
 **----------------- OrderReview.razor -----------------------**
 ```
@@ -662,7 +672,7 @@ Then replace todo...
 
 When we place an order, it should automatically navigate to that order...
 
-Add ...
+In *index.razor* add ...
 
 **----------------- Index.razor -----------------------**
 ```
@@ -864,7 +874,8 @@ Change PlaceOrder to reference OrderState
 	}
 ```
 
-Build and run - show AppState is fixed
+*Build and run*
+Show AppState is fixed
 
 ---
 # Add Checkout process - to capture delivery address
@@ -875,7 +886,7 @@ However, nothing in the pizza ordering flow yet populates this data, so all your
 
 It's time to fix this by adding a "checkout" screen that requires customers to enter a valid address.
 
-Add new page: Checkout.razor
+Add new page component: Checkout.razor
 
 **----------------- Checkout.razor -----------------------**
 ```
@@ -925,7 +936,7 @@ Replace Button with link ...
 *******************************************************************
 # Now lets create a resusable Address Editor Component
 
-Create: AddressEditor.razor in shared
+Create a shared component: *AddressEditor.razor*
 
 **----------------- AddressEditor.razor -----------------------**
 ```
@@ -976,7 +987,7 @@ Create: AddressEditor.razor in shared
 }
 ```
 
-Inside <div class="checkout-cols"> below 1st div, add ...
+Inside `<div class="checkout-cols">` below 1st div, add ...
 
 **----------------- Checkout.razor -----------------------**
 ```
@@ -1055,15 +1066,15 @@ To do that we will ...
 - This is ugly, lets make it better
 
 **----------------- Checkout.razor -----------------------**
-- Remove:  <ValidationSummary />
-- Change EditForm tag: add OnValidSubmit="PlaceOrder"
-- Change button to submit and remove onclick: <button type="submit">
+- Remove:  `<ValidationSummary />`
+- Change EditForm tag: add `OnValidSubmit="PlaceOrder"`
+- Change button to submit and remove onclick: `<button type="submit">`
 
-Now in AddressEditor.razor
+**----------------- AddressEditor.razor -----------------------**
+Now in *AddressEditor.razor*
 
 Add ValidationMessage to each input item
 
-**----------------- AddressEditor.razor -----------------------**
 ```
 <div class="form-field">
     <label>Name:</label>
@@ -1183,6 +1194,7 @@ The server side of our application has already been configured to do OAuth with 
 - Show: Startup.cs
 
 We just need to turn it on
+To do that lets open *OrderController.cs*
 
 **----------------- OrderController.cs -----------------------**
 
@@ -1193,6 +1205,9 @@ Uncomment `[Authorize]`
 **Build and run**
 
 Try to view orders => we can no longer do anything with orders (because we are not authorized)
+
+---
+# Client Side Authorization
 
 - So now we need to enforce authorization on the client side
 - In client project create: ServerAuthenticationStateProvider.cs
